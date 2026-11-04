@@ -21,7 +21,10 @@ app = FastAPI(title="Kerala Trails API", version="1.0.0")
 app.add_middleware(CORSMiddleware, allow_origins=[x.strip() for x in settings.cors_origins.split(",")], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
 @app.get("/api/health")
-def health(): return {"status":"ok"}
+def health(db: Session = Depends(get_db)):
+    from sqlalchemy import text
+    db.execute(text("SELECT 1"))
+    return {"status": "ok", "database": engine.dialect.name, "database_connected": True}
 
 @app.post("/api/auth/login", response_model=TokenOut)
 def login(payload: LoginIn, db: Session = Depends(get_db)):

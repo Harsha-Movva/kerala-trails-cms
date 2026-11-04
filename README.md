@@ -2,11 +2,21 @@
 
 A responsive South India travel website and staff CMS built around a practical core: public package pages, seasonal package pricing, versioned package editing, private draft previews, traveller enquiries, AI-assisted extraction, and human review.
 
+## Live demo
+
+- **Website:** https://kerala-trails-live.vercel.app
+- **Staff CMS:** https://kerala-trails-live.vercel.app/admin
+- **API:** https://kerala-trails-api-app.onrender.com
+- **API health route:** https://kerala-trails-api-app.onrender.com/api/health
+- **GitHub:** https://github.com/Harsha-Movva/kerala-trails-cms
+
+The website and API have successful production deployment records. The current Render demo service uses a local SQLite file; connect the provisioned Render PostgreSQL database before using this for real traveller enquiries or production operations. See [deployment.md](deployment.md).
+
 ## Stack
 
 - **Web:** Next.js App Router, React, Tailwind CSS
 - **API:** FastAPI, Pydantic, SQLAlchemy
-- **Database:** PostgreSQL (SQLite supported for local development)
+- **Database:** PostgreSQL (SQLite supported for local development and current temporary demo runtime)
 - **Authentication:** signed JWT access tokens and scrypt password hashes
 - **AI:** OpenAI structured JSON extraction with a conservative local fallback
 - **Tests:** Pytest and FastAPI TestClient
@@ -54,4 +64,4 @@ The current core slice does not include a full blog CMS, quote PDF generation, e
 
 Without `OPENAI_API_KEY`, the local parser is a deterministic fallback, not a generative model. It flags extracted fields for human review. With an API key, provider-backed extraction is enabled. AI output does not set or invent package prices; displayed prices come from package records.
 
-No live application URL is claimed until hosting is configured and smoke-tested.
+The current live API demo uses SQLite on the Render service filesystem, which is not durable storage. Connect the separately provisioned Render PostgreSQL instance before production use.
